@@ -1,0 +1,200 @@
+## `glp-work`
+
+This folder contains a (trimmed) copy of the "working" repository of this project.
+
+- `experiments/` contains one-off experiments performed for this work, for instance the numerical tests of stress and heat flux implementation and the equation of state
+- `runs/` contains the workflows used for Green-Kubo runs, phonon calculations, and the vibrational density of states
+- `models/` contains training data, scripts, and resulting models used in this work
+
+In `runs/`, the experiments used in this manuscript can be found under `snse/skeleton`. `gk_2_fk_lattice` contains the workflows for the GK experiments, `phonons` for phonon band structure, and `vdos` for the vibrational density of states. All workflows are designed to be copied into a folder with a `model/` subfolder that is a copy of the `module` subfolder created by `mlff` during training.
+
+
+## Dependencies
+
+Here's a copy of the `pip list` output used for work in `runs`:
+
+```
+Package                      Version              Editable project location
+---------------------------- -------------------- ------------------------------------
+absl-py                      1.3.0
+appdirs                      1.4.4
+ase                          3.22.1
+asttokens                    2.2.1
+astunparse                   1.6.3
+attrs                        19.3.0
+backcall                     0.2.0
+blosc2                       2.0.0
+cached-property              1.5.2
+cachetools                   5.2.0
+certifi                      2022.12.7
+cftime                       1.6.2
+charset-normalizer           3.0.1
+chex                         0.1.5
+click                        8.1.3
+click-aliases                1.0.1
+click-completion             0.5.2
+cloudpickle                  2.2.1
+comm                         0.1.2
+comms                        0.1.0
+contextlib2                  21.6.0
+contourpy                    1.0.7
+cycler                       0.11.0
+Cython                       0.29.33
+dask                         2023.1.1
+dataclasses                  0.6
+debugpy                      1.6.6
+decorator                    5.1.1
+dm-haiku                     0.0.9
+dm-tree                      0.1.8
+docker-pycreds               0.4.0
+e3nn-jax                     0.15.0
+einops                       0.6.0
+etils                        1.0.0
+exceptiongroup               1.1.0
+executing                    1.2.0
+fhi-vibes                    1.0.4
+flatbuffers                  22.12.6
+flax                         0.6.4
+fonttools                    4.38.0
+fsspec                       2023.1.0
+future                       0.18.3
+gast                         0.4.0
+gitdb                        4.0.10
+GitPython                    3.1.30
+gkx                          0.1.0                /talos/u/mlang/glp/glp-infra/gkx
+google-api-core              2.11.0
+google-auth                  2.15.0
+google-auth-oauthlib         0.4.6
+google-pasta                 0.2.0
+googleapis-common-protos     1.57.0
+grpcio                       1.51.1
+h5py                         3.8.0
+idna                         3.4
+importlib-metadata           6.0.0
+importlib-resources          5.10.2
+iniconfig                    2.0.0
+ipykernel                    6.21.1
+ipython                      8.9.0
+jax                          0.4.2
+jax-md                       0.2.3
+jaxlib                       0.4.2+cuda11.cudnn82
+jaxopt                       0.6
+jconfigparser                0.1.3
+jedi                         0.18.2
+Jinja2                       3.1.2
+jmp                          0.0.3
+joblib                       1.2.0
+jraph                        0.0.6.dev0
+jupyter_client               8.0.2
+jupyter_core                 5.2.0
+keras                        2.11.0
+kiwisolver                   1.4.4
+libclang                     14.0.6
+locket                       1.0.0
+lz                           0.11.1
+Markdown                     3.4.1
+markdown-it-py               2.1.0
+MarkupSafe                   2.1.2
+matplotlib                   3.6.3
+matplotlib-inline            0.1.6
+mdurl                        0.1.2
+memoir                       0.0.3
+mkl-fft                      1.3.1
+mkl-random                   1.2.2
+mkl-service                  2.4.0
+ml-collections               0.1.1
+mlff                         0.1                  /talos/u/mlang/glp/software/mlff-dev
+mpmath                       1.2.1
+msgpack                      1.0.4
+mypy                         0.991
+mypy-extensions              0.4.3
+nest-asyncio                 1.5.6
+netCDF4                      1.6.2
+numexpr                      2.8.4
+numpy                        1.23.5
+oauthlib                     3.2.2
+opt-einsum                   3.3.0
+optax                        0.1.4
+orbax                        0.1.0
+packaging                    23.0
+pandas                       1.5.3
+paradigm                     0.6.2
+parso                        0.8.3
+partd                        1.3.0
+pathtools                    0.1.2
+pexpect                      4.8.0
+phonopy                      2.8.1
+pickleshare                  0.7.5
+Pillow                       9.4.0
+pip                          22.3.1
+platformdirs                 3.0.0
+pluggy                       1.0.0
+prompt-toolkit               3.0.36
+protobuf                     3.19.6
+psutil                       5.9.4
+ptyprocess                   0.7.0
+pure-eval                    0.2.2
+py-cpuinfo                   9.0.0
+pyasn1                       0.4.8
+pyasn1-modules               0.2.8
+Pygments                     2.14.0
+pyparsing                    3.0.9
+pytest                       7.2.1
+python-dateutil              2.8.2
+pytz                         2022.7.1
+PyYAML                       5.4.1
+pyzmq                        25.0.0
+regex                        2022.10.31
+reprit                       0.8.0
+requests                     2.28.2
+requests-oauthlib            1.3.1
+rich                         13.3.1
+rsa                          4.9
+schnax                       0.1.0
+schnetkit                    0.1.0
+schnetpack                   1.0.1
+scikit-learn                 1.2.1
+scipy                        1.9.3
+seaborn                      0.11.2
+seekpath                     1.9.7
+sentry-sdk                   1.14.0
+setproctitle                 1.3.2
+setuptools                   65.6.3
+shellingham                  1.5.0.post1
+six                          1.16.0
+smmap                        5.0.0
+son                          0.4.2
+specable                     0.1.0
+spglib                       1.16.5
+stack-data                   0.6.2
+stepson                      0.2.0a1
+sympy                        1.11.1
+tables                       3.8.0
+tabulate                     0.9.0
+tensorboard                  2.11.2
+tensorboard-data-server      0.6.1
+tensorboard-plugin-wit       1.8.1
+tensorboardX                 2.5.1
+tensorflow-estimator         2.11.0
+tensorflow-gpu               2.11.0
+tensorflow-io-gcs-filesystem 0.29.0
+tensorstore                  0.1.30
+termcolor                    2.1.1
+threadpoolctl                3.1.0
+tomli                        2.0.1
+toolz                        0.12.0
+torch                        1.10.0a0+gitunknown
+torchaudio                   0.9.0
+tornado                      6.2
+tqdm                         4.64.1
+traitlets                    5.9.0
+typing_extensions            4.4.0
+urllib3                      1.26.14
+wandb                        0.13.9
+wcwidth                      0.2.6
+Werkzeug                     2.2.2
+wheel                        0.37.1
+wrapt                        1.14.1
+xarray                       2023.1.0
+zipp                         3.12.0
+```

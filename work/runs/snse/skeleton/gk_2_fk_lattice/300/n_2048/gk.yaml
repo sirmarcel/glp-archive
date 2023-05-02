@@ -1,0 +1,19 @@
+nve:
+  dt: 4.0
+maxsteps: 1000000
+batch_size: 25
+chunk_size: 25000
+potential:
+  mlff:
+    folder: "../../../../model/"
+
+calculator:
+  heat_flux_unfolded:
+    convective: True
+    skin: 1.0
+    skin_unfolder: 2.0
+
+files:
+  geometry: geometry.in
+  supercell: geometry.in.supercell
+  primitive: geometry.in.primitive

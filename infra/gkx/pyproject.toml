@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "gkx"
+version = "0.1.0"
+description = "gknet jax infrastructure"
+authors = ["Marcel Langer <dev@marcel.science>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = ">=3.7"
+comms =  { git = "https://github.com/sirmarcel/comms.git", branch = "main" }
+stepson =  { git = "https://gitlab.com/sirmarcel/stepson.git", branch = "main" }
+fhi-vibes = { git = "https://gitlab.com/vibes-developers/vibes.git", branch = "master" }
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+gkx = 'gkx.cli:gkx'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

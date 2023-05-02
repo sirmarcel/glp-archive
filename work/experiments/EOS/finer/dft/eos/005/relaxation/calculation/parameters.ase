@@ -1,0 +1,9 @@
+dict(compute_analytical_stress=True,
+     compute_forces=True,
+     k_grid=[4, 8, 8],
+     output_level='MD_light',
+     relativistic='atomic_zora scalar',
+     sc_accuracy_rho=1e-07,
+     species_dir='/cfs/klemming/projects/snic/snic2021-1-10/dardel-test/flokno/projects/so3krates/dev_SnSe/test_10_EOS_easy/finer/dft_01/eos/005/relaxation/basissets',
+     use_pimd_wrapper=['localhost', 10011],
+     xc='pbesol')

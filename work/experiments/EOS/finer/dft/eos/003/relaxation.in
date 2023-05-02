@@ -1,0 +1,29 @@
+[files]
+geometry:                      geometry.in
+
+[calculator]
+name:                          aims
+socketio:                      True
+
+[calculator.parameters]
+xc:                            pbesol
+sc_accuracy_rho:               1e-7
+compute_analytical_stress:     True
+
+[calculator.kpoints]
+density:                       5
+
+[calculator.basissets]
+default:                       light
+
+[machine]
+basissetloc =                  /cfs/klemming/home/f/flokno/local/FHIaims/species_defaults/defaults_2010
+
+[relaxation]
+driver =                       BFGS
+fmax =                         1e-4
+unit_cell =                    False
+fix_symmetry =                 False
+
+[slurm]
+timeout:      30

@@ -1,0 +1,16 @@
+nve:
+  dt: 4.0
+maxsteps: 7500
+chunk_size: 2500
+potential:
+  mlff:
+    folder: "../model/"
+
+calculator:
+  atom_pair:
+    skin: 1.0
+
+files:
+  geometry: geometry.in
+  supercell: geometry.in.supercell
+  primitive: geometry.in.primitive

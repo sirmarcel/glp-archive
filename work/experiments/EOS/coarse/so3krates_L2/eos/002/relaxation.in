@@ -1,0 +1,21 @@
+[calculator]
+name:                          calculator
+module:                        glp.vibes
+
+[calculator.parameters.calculator]
+calculator:                    supercell
+skin:                          2
+n_replicas:                    4
+
+[calculator.parameters.potential]
+potential:                     mlff
+folder:                        /Users/flokno/working/projects/so3krates/dev_SnSe/production_01/train_default_L2/module
+
+
+[relaxation]
+driver:                        BFGS
+fmax:                          0.0001
+unit_cell:                     False
+fix_symmetry:                  False
+workdir:                       relaxation
+

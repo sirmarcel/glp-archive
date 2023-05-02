@@ -1,0 +1,20 @@
+nvt:
+  dt: 4.0
+  temperature: 300
+  friction: 0.02
+maxsteps: 50000
+batch_size: 25
+chunk_size: 25000
+potential:
+  mlff:
+    folder: "../../../../model/"
+
+calculator:
+  atom_pair:
+    heat_flux: False
+    skin: 1.0
+
+files:
+  geometry: geometry.in
+  supercell: geometry.in.supercell
+  primitive: geometry.in.primitive
