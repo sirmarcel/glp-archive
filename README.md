@@ -1,14 +1,17 @@
 # `glp-archive`
 ## Code and Data for "Stress and heat flux with automatic differentiation"
 
-This repository contains data, code, and related artefacts supporting the following publication:
+This repository contains data, code, and related artefacts supporting the following publication ([preprint](https://arxiv.org/abs/2305.01401):
 
 ```
 Stress and heat flux via automatic differentiation
 by Marcel F. Langer, J. Thorben Frank, and Florian Knoop
 
-arXiv: TBD
+arXiv:2305.01401
 ```
+
+This repository is available at [https://github.com/sirmarcel/glp-archive](https://github.com/sirmarcel/glp-archive). Selected versions are archived on Zenodo, under [doi:10.5281/zenodo.7852529](https://doi.org/10.5281/zenodo.7852529).
+
 
 ## Overview
 
@@ -34,3 +37,7 @@ These tools were developed during the work in the manuscript. The following vers
 - `mlff.tools @ v0.0.1`
 
 We additionally note that the GK-MD functionality has been factored out into [`gkx`](https://github.com/sirmarcel/gkx).
+
+## Versions
+
+- `v1.0`: arXiv submission v1, archived at [doi:10.5281/zenodo.7852530](https://doi.org/10.5281/zenodo.7852530)
