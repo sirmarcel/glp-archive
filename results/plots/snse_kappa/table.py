@@ -73,7 +73,7 @@ components_empty = ["--"] * 3
 
 table.append(
     [
-        r"Knoop~\etal~\cite{kpsc2022t}",
+        r"Knoop~\etal~\cite{kpsc2023t}",
         r"\acs{dft} (extrapolated)",
         format_kappa(reference["knoop"].mean(), reference["knoop_errors"].mean()),
         *components_empty,

@@ -6,8 +6,10 @@ This repository contains data, code, and related artefacts supporting the follow
 ```
 Stress and heat flux via automatic differentiation
 by Marcel F. Langer, J. Thorben Frank, and Florian Knoop
+to be published in The Journal of Chemical Physics
 
 arXiv:2305.01401
+doi:10.1063/5.0155760
 ```
 
 This repository is available at [https://github.com/sirmarcel/glp-archive](https://github.com/sirmarcel/glp-archive). Selected versions are archived on Zenodo, under [doi:10.5281/zenodo.7852529](https://doi.org/10.5281/zenodo.7852529).
@@ -40,4 +42,5 @@ We additionally note that the GK-MD functionality has been factored out into [`g
 
 ## Versions
 
+- `v1.1`: published version, archived at [doi:10.5281/zenodo.8406532](https://doi.org/10.5281/zenodo.8406532)
 - `v1.0`: arXiv submission v1, archived at [doi:10.5281/zenodo.7852530](https://doi.org/10.5281/zenodo.7852530)

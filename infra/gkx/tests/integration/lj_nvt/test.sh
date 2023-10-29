@@ -1,5 +1,2 @@
-gkx run md gk.yaml
-gkx run md gk_longer.yaml
-gkx out gk trajectory/
+gkx run md md.yaml
 rm -r trajectory/
-rm *.nc

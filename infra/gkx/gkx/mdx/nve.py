@@ -113,9 +113,14 @@ def run(
             dataset.to_netcdf(tmpfile)
             tmpfile.replace(outfolder / f"{n_chunk:06d}.nc")
 
+            comms.talk(
+                f"completed chunk {n_chunk} "
+                + f"(ETA: {(remaining_time/60):.1f}min) ({time_per_step*1000:.0f}ms/step)",
+                full=True,
+            )
+
             n_step += chunk_size
             n_chunk += 1
 
     reporter.tick("(✨) " + state_str)
-
-    reporter.done()
+    reporter.done(f"done at {(reporter.timer_step() / chunker.count)*1000:.0f}ms/step")

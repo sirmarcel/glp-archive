@@ -16,6 +16,11 @@ def aligner(width):
     return formatter
 
 
+def to_num(entry):
+    entry = str(entry)
+    return r"\num{X}".replace("X", entry)
+
+
 def map_across(table, fns):
     result = []
 
@@ -60,6 +65,12 @@ table_to_tex = partial(table_to_string, colsep=" & ", rowsep=" \\\\ \n")
 
 
 def make_tabular(titles, table, layout=None, width=20, heading=None, tables=None):
+    if tables is None:
+        tables = [table]
+
+    if not _is_nested(titles):
+        titles = [titles]
+
     if layout is None:
         layout = " ".join(["l"] * len(titles))
 
@@ -67,16 +78,18 @@ def make_tabular(titles, table, layout=None, width=20, heading=None, tables=None
     out += r"\toprule" + "\n"
     if heading is not None:
         out += heading
-    out += table_to_tex([titles], width=width)
-    
-    if tables is None:
-        tables = [table]
+
+    out += table_to_tex(titles, width=width)
 
     for table in tables:
         out += r"\midrule" + "\n"
-        out += table_to_tex(table, width=width)    
+        out += table_to_tex(table, width=width)
 
     out += r"\bottomrule" + "\n"
     out += r"\end{tabular}" + "\n"
 
     return out
+
+
+def _is_nested(l):
+    return isinstance(l[0], list)

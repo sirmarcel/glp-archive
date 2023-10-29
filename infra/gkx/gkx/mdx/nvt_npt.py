@@ -1,11 +1,13 @@
-"""Run NVT MD w/ ASE."""
+"""Run NVT/NPT MD w/ ASE."""
 
 from jax import lax, jit
 
 import numpy as np
 from ase.units import fs
-from ase.md import Langevin
+from ase.constraints import voigt_6_to_full_3x3_stress
+
 from pathlib import Path
+from collections import namedtuple
 
 from glp.ase import Calculator
 from glp.instantiate import get_calculator
@@ -19,14 +21,14 @@ from .dataset import chunk_to_dataset
 from .batcher import to_batch, fake_batch
 from .chunker import Chunker
 
+PointWithCell = namedtuple("PointWithCell", ("R", "P", "cell"))
+
 
 def run(
     maxsteps,
     potential,
     calculator,
-    dt,
-    temperature,
-    friction,
+    dynamics_config,
     initial_atoms,
     supercell_atoms=None,
     primitive_atoms=None,
@@ -48,7 +50,48 @@ def run(
     atoms = initial_atoms.copy()
     atoms.calc = calculator
 
-    dynamics = Langevin(atoms, dt * fs, temperature_K=temperature, friction=friction)
+    nvt = dynamics_config.get("nvt", None)
+    npt = dynamics_config.get("npt", None)
+
+    if nvt:
+        comms.talk("running nvt")
+        from ase.md import Langevin
+
+        dt = nvt["dt"]
+        temperature = nvt["temperature"]
+        friction = nvt["friction"]
+        dynamics = Langevin(
+            atoms, dt * fs, temperature_K=temperature, friction=friction
+        )
+
+        is_npt = False
+
+    if npt:
+        comms.talk("running npt")
+        if npt["homogeneous"]:
+            from ase.md.nptberendsen import NPTBerendsen as Berendsen
+        else:
+            from ase.md.nptberendsen import Inhomogeneous_NPTBerendsen as Berendsen
+
+        dt = npt["dt"]
+        taut = npt["taut"] * fs
+        taup = npt["taup"] * fs
+        compressibility = npt["compressibility"]
+        temperature = npt["temperature"]
+        pressure = npt["pressure"]
+
+        dynamics = Berendsen(
+            atoms,
+            dt * fs,
+            temperature_K=temperature,
+            compressibility=compressibility,
+            taut=taut,
+            taup=taup,
+            pressure=pressure,
+        )
+
+        is_npt = True
+        atoms.calc.raw = False
 
     chunker = Chunker(chunk_size)
 
@@ -62,13 +105,13 @@ def run(
 
     if n_step == 0:
         # make sure to save the initial step
-        chunker.submit(atoms_to_batch(atoms))
+        chunker.submit(atoms_to_batch(atoms, is_npt=is_npt))
 
     while n_step < maxsteps:
         reporter.tick("🚀 " + state_str)
 
         dynamics.run(steps=1)
-        chunk = chunker.submit(atoms_to_batch(atoms))
+        chunk = chunker.submit(atoms_to_batch(atoms, is_npt=is_npt))
 
         time_per_step = reporter.timer_step() / chunker.count
         current_steps = chunker.count + initial_step
@@ -105,7 +148,18 @@ def run(
     reporter.done()
 
 
-def atoms_to_batch(atoms):
-    point = Point(atoms.get_positions(), atoms.get_momenta())
-    results = atoms.calc.results
+def atoms_to_batch(atoms, is_npt=False):
+    if not is_npt:
+        point = Point(atoms.get_positions(), atoms.get_momenta())
+    else:
+        point = PointWithCell(
+            atoms.get_positions(), atoms.get_momenta(), atoms.get_cell().array
+        )
+
+    results = atoms.calc.results.copy()
+    if is_npt:
+        results["stress"] = (
+            voigt_6_to_full_3x3_stress(results["stress"]) * atoms.get_volume()
+        )
+
     return fake_batch(point, results)
